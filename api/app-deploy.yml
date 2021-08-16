@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: 
+  name: warehouse-app
+  namespace: warehouse-ns
+  labels:
+    app: warehouse-app
+spec:
+  selector:
+    matchLabels:
+      app: warehouse-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: warehouse-app
+
+    spec:
+      containers:
+      - image: lolverae/warehouse_service:latest
+        name: warehouse-app
+        env:
+        - name: COUCHDB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-user-pass
+              key: username
+        - name: COUCHDB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-user-pass
+              key: password
+        - name: COUCH_HOST
+          value: "warehouse-db"
+        - name: COUCH_PORT
+          value: "5984"
+        ports:       
+        - protocol: TCP
+          containerPort: 8000
+        volumeMounts:
+        - name: warehouse-app-storage
+          mountPath: /var/www/html
+      volumes:
+      - name: warehouse-app-storage
