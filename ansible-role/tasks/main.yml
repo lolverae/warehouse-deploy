@@ -1,2 +1,22 @@
 ---
 # tasks file for ansible-role
+- name: downloading minikube
+  become: yes
+  become_user: root
+  get_url:
+    url: '{{ minikube_url }}'
+    dest: '{{ minikube_install_target }}'
+    checksum: '{{ minikube_checksum }}'
+    mode: 0755
+
+- name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
+  become: yes
+  become_user: root
+  file:
+    src: '{{ minikube_install_target }}'
+    dest: '{{ minikube_install_link }}'
+    state: link
+
+- name: installing drivers
+  with_teams: '{{ minikube_install_drivers | default([]) }}'
+  include_tasks: '{{ item }}.yml'
