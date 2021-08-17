@@ -1,8 +1,10 @@
 ---
 # vars file for ansible-role
-minikube_platform: '{{ minikue_os }}-{{ minikube_arch }}'
+minikube_platform: '{{ minikube_os }}-{{ minikube_arch }}'
 minikube_exe: minikube-{{ minikube_platform }}{{minikube_exe_suffix|default("") }}
 minikube_url: '{{ minikube_mirror }}/{{ minikube_version }}/{{ minikube_exe }}'
 minikube_checksum: '{{ minikube_checksums[minikube_version][minikube_platform] }}'
 minikube_install_target: '{{ minkube_install_dir }}/{{ minikube_exe }}-{{ minikube_platform }}'
 minikube_install_link: '{{ minikube_install_dir }}/minikube'
+minikube_os: 'linux'
+minikube_arch: 'x86-64'
