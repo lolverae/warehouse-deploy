@@ -1,0 +1,11 @@
+---
+
+- hosts: 168.61.208.128
+  become: true
+  tasks:
+    - name: update repository index
+      yum:
+        update_cache: yes
+    - name: install zsh package
+      yum:
+        name: zsh 

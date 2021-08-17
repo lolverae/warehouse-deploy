@@ -1,7 +1,14 @@
 ---
 # tasks file for ansible-role
+- name: install updates for CentOS
+  tags: always
+  yum: 
+    update_only: yes
+    update_cache: yes
+
 - name: downloading minikube
   become: yes
+  tags: minikube
   become_user: root
   get_url:
     url: '{{ minikube_url }}'
@@ -11,12 +18,9 @@
 
 - name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
   become: yes
+  tags: minikube
   become_user: root
   file:
     src: '{{ minikube_install_target }}'
     dest: '{{ minikube_install_link }}'
     state: link
-
-- name: installing drivers
-  with_teams: '{{ minikube_install_drivers | default([]) }}'
-  include_tasks: '{{ item }}.yml'
