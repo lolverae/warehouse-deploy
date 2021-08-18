@@ -2,4 +2,4 @@
 - hosts: 104.43.248.243
   remote_user: ansadmin
   roles:
-    - /home/ansadmin/warehouse-deploy/ansible-role
+    - minikube

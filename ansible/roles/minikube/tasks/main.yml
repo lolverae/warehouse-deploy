@@ -7,7 +7,7 @@
     update_cache: yes
 
 - name: downloading minikube
-  become: yes
+  become: true
   tags: minikube
   get_url:
     url: '{{ minikube_url }}'
@@ -23,7 +23,7 @@
     #dest: '{{ minikube_install_target }}'
     #state: link
 - name: install minikube kvm drivers
-  become: yes
+  become: true
   tags: minikube
   yum: 
     name: 
@@ -32,8 +32,18 @@
       - libvirt-python
       - libguestfs-tools
       - bridge-utils
-      
+
+- name: start virtualization service
+  become: true
+  service:
+    name: libvirtd
+    state: started
+
+- name: installing minikubqwee
+  become: true 
+  command: curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 - name: installing minikube
-  become: yes
+  become: true
   tags: minikube
-  command: sudo install {{ minikube_install_target }} {{ minikube_install_link }}
+  command: install {{ minikube_install_target }} {{ minikube_install_link }}
