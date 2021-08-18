@@ -5,7 +5,15 @@
   yum: 
     update_only: yes
     update_cache: yes
-
+  when: ansible_distribution==CentOS
+ 
+- name: install update for Ubuntu
+  tags: always
+  apt: 
+    update_only: yes
+    update_cache: yes
+  when: ansible_distribution==Ubuntu
+  
 - name: downloading minikube
   become: yes
   tags: minikube
@@ -13,7 +21,6 @@
   get_url:
     url: '{{ minikube_url }}'
     dest: '{{ minikube_install_target }}'
-    checksum: '{{ minikube_checksum }}'
     mode: 0755
 
 - name: linking {{ minikube_install_link }} to {{ minikube_install_target }}

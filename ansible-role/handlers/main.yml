@@ -6,4 +6,4 @@
     daemon_reload: yes
     name: kube
   become: true
-  listen: ansible-orchestration | refresh kube
+  listen: refresh kube
