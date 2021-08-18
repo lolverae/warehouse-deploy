@@ -5,15 +5,7 @@
   yum: 
     update_only: yes
     update_cache: yes
-  when: ansible_distribution==CentOS
- 
-- name: install update for Ubuntu
-  tags: always
-  apt: 
-    update_only: yes
-    update_cache: yes
-  when: ansible_distribution==Ubuntu
-  
+
 - name: downloading minikube
   become: yes
   tags: minikube
@@ -22,15 +14,26 @@
     dest: '{{ minikube_install_target }}'
     mode: 0755
 
-- name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
+    #- name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
+    #become: yes
+    #become_user: root
+    #tags: minikube
+    #file:
+    #src: '{{ minikube_install_target }}'
+    #dest: '{{ minikube_install_target }}'
+    #state: link
+- name: install minikube kvm drivers
   become: yes
   tags: minikube
-  file:
-    src: '{{ minikube_install_target }}'
-    dest: '{{ minikube_install_target }}'
-    state: link
-
+  yum: 
+    name: 
+      - libvirt
+      - qemu-kvm
+      - libvirt-python
+      - libguestfs-tools
+      - bridge-utils
+      
 - name: installing minikube
   become: yes
   tags: minikube
-  command: install minikube-{{ minikube_os }}-{{ minikube_arch }} {{ minikube_install_target }}
+  command: sudo install {{ minikube_install_target }} {{ minikube_install_link }}

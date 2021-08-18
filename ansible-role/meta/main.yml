@@ -21,6 +21,3 @@ galaxy_info:
     - minikube
   role_name: minikube
 
-dependencies:
-  - role: lolverae.kuectl
-    version: v1.0.0
