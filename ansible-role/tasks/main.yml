@@ -17,7 +17,6 @@
 - name: downloading minikube
   become: yes
   tags: minikube
-  become_user: root
   get_url:
     url: '{{ minikube_url }}'
     dest: '{{ minikube_install_target }}'
@@ -26,8 +25,12 @@
 - name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
   become: yes
   tags: minikube
-  become_user: root
   file:
     src: '{{ minikube_install_target }}'
-    dest: '{{ minikube_install_link }}'
+    dest: '{{ minikube_install_target }}'
     state: link
+
+- name: installing minikube
+  become: yes
+  tags: minikube
+  command: install minikube-{{ minikube_os }}-{{ minikube_arch }} {{ minikube_install_target }}
