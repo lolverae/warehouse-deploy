@@ -14,14 +14,14 @@
     dest: '{{ minikube_install_target }}'
     mode: 0755
 
-    #- name: linking {{ minikube_install_link }} to {{ minikube_install_target }}
-    #become: yes
-    #become_user: root
-    #tags: minikube
-    #file:
-    #src: '{{ minikube_install_target }}'
-    #dest: '{{ minikube_install_target }}'
-    #state: link
+- name: downloading kubectl
+  become: true
+  tags: kubectl
+  get_url:
+    url: '{{ kubectl_url }}'
+    dest: '{{ kubectl_install_target }}'
+    mode: 0755
+
 - name: install minikube kvm drivers
   become: true
   tags: minikube
@@ -38,11 +38,7 @@
   service:
     name: libvirtd
     state: started
-
-- name: installing minikubqwee
-  become: true 
-  command: curl -LO https://dl.k8s.io/release/v1.22.0/bin/linux/amd64/kubectl && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
+   
 - name: installing minikube
   become: true
   tags: minikube

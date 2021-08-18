@@ -1,5 +1,5 @@
 ---
-- hosts: 104.43.248.243
+- hosts: kube-cluster 
   remote_user: ansadmin
   roles:
     - minikube
