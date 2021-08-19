@@ -1,0 +1,10 @@
+# sudo wget -O /etc/yum.repos.d/jenkins.repo \
+#     https://pkg.jenkins.io/redhat-stable/jenkins.repo
+# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+# sudo yum upgrade
+# sudo yum install epel-release java-11-openjdk-devel
+# sudo yum install jenkins
+# sudo systemctl daemon-reload
+# java -jar agent.jar -jnlpUrl http://52.251.52.237:8080/computer/kube-agent/jenkins-agent.jnlp -secret fe1c9da9e4e34959ae7b86fe7363f697052331ddeb9dd1266504717ef1739500 -workDir "/var/lib/jenkins/"
+
+

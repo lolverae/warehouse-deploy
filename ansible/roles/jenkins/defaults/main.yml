@@ -1,0 +1,5 @@
+---
+# variables for jenkins installation
+jenkins_version: v1.22.0
+minikube_mirror: https://storage.googleapis.com/minikube/releases/latest/minikube
+minikube_install_dir: /usr/local/bin
