@@ -1,0 +1,1 @@
+jenkins_url: '{{ jenkins_mirror }}/{{ jenkins_version }}'
