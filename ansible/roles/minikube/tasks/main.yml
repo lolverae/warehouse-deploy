@@ -1,11 +1,19 @@
 ---
-# tasks file for ansible-role
+# -------------------Updating OS per distro----------------------- 
 - name: install updates for CentOS
   tags: always
   yum: 
     update_only: yes
     update_cache: yes
+  when: ansible_distribution == "CentOS"
 
+- name: install updates for Ubuntu
+  tags: always
+  apt: 
+    update_only: yes
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+# -------------------Software Download-----------------------
 - name: downloading minikube
   become: true
   tags: minikube
@@ -21,7 +29,7 @@
     url: '{{ kubectl_url }}'
     dest: '{{ kubectl_install_target }}'
     mode: 0755
-
+# -------------------Software Installation-----------------------
 - name: install minikube kvm drivers
   become: true
   tags: minikube
