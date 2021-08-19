@@ -1,5 +1,5 @@
 ---
-# -------------------Updating OS per distro----------------------- 
+# ------------------ Updating package managers ---------------------- 
 - name: install updates for CentOS
   tags: always
   yum: 
@@ -13,7 +13,7 @@
     update_only: yes
     update_cache: yes
   when: ansible_distribution == "Ubuntu"
-# -------------------Software Download-----------------------
+# ------------------- Software Download -----------------------
 - name: downloading minikube
   become: true
   tags: minikube
@@ -29,7 +29,7 @@
     url: '{{ kubectl_url }}'
     dest: '{{ kubectl_install_target }}'
     mode: 0755
-# -------------------Software Installation-----------------------
+# ------------------ Software Installation -----------------------
 - name: install minikube kvm drivers
   become: true
   tags: minikube
@@ -41,13 +41,17 @@
       - libguestfs-tools
       - bridge-utils
 
+# - name: installing minikube
+#   become: true
+#   tags: minikube
+#   command: install {{ minikube_install_target }} {{ minikube_install_link }}
+# ------------------- Starting Services & Minikube -----------------------
 - name: start virtualization service
   become: true
   service:
     name: libvirtd
     state: started
    
-- name: installing minikube
-  become: true
+- name: Starting minikube
   tags: minikube
-  command: install {{ minikube_install_target }} {{ minikube_install_link }}
+  command: minikube start
