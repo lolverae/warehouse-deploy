@@ -6,4 +6,12 @@
 # sudo yum install jenkins
 # sudo systemctl daemon-reload
 
-
+# ------------------ Software Installation -----------------------
+- name: install jenkins dependencies
+  become: true
+  tags: jenkins
+  yum: 
+    name: 
+      - epel-release
+      - java-11-openjdk-devel
+      - jenkins

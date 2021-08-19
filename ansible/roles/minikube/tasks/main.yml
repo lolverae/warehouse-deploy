@@ -40,6 +40,17 @@
       - libvirt-python
       - libguestfs-tools
       - bridge-utils
+  when: ansible_distribution == "CentOS"
+
+- name: install updates for Ubuntu
+  tags: always
+  apt: 
+    - qemu-kvm
+    - libvirt-daemon-system
+    - libvirt-clients
+    - bridge-utils
+
+  when: ansible_distribution == "Ubuntu"      
 
 # ------------------- Starting Services & Minikube -----------------------
 - name: start virtualization service
