@@ -1,13 +1,5 @@
-# sudo wget -O /etc/yum.repos.d/jenkins.repo \
-#     https://pkg.jenkins.io/redhat-stable/jenkins.repo
-# sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-# sudo yum upgrade
-# sudo yum install epel-release java-11-openjdk-devel
-# sudo yum install jenkins
-# sudo systemctl daemon-reload
-
 # ------------------ Software Installation -----------------------
-- name: install jenkins dependencies
+- name: install jenkins & dependencies on CentOS
   become: true
   tags: jenkins
   yum: 
@@ -15,3 +7,16 @@
       - epel-release
       - java-11-openjdk-devel
       - jenkins
+  when: ansible_distribution == "CentOS"
+
+- name: install jenkins  for Ubuntu
+  tags: jenkins
+  apt: 
+    - jenkins
+
+  when: ansible_distribution == "Ubuntu"  
+# ------------------- Starting Services -----------------------
+- name: reloading daemon
+  become: true
+  systemd:
+    daemon-reload: yes
