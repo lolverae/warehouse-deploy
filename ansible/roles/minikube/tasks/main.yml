@@ -41,10 +41,6 @@
       - libguestfs-tools
       - bridge-utils
 
-# - name: installing minikube
-#   become: true
-#   tags: minikube
-#   command: install {{ minikube_install_target }} {{ minikube_install_link }}
 # ------------------- Starting Services & Minikube -----------------------
 - name: start virtualization service
   become: true

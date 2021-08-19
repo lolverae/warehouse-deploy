@@ -2,7 +2,6 @@
 # vars file for ansible-role
 minikube_platform: '{{ minikube_os }}-{{ minikube_arch }}'
 minikube_url: '{{ minikube_mirror }}-{{ minikube_platform }}'
-minikube_install_target: '/usr/local/bin/{{ minikube_platform }}'
-minikube_install_link: '/usr/local/bin/minikube'
+minikube_install_target: '/usr/local/bin/minikube'
 kubectl_install_target: '/usr/local/bin/kubectl'
-kubectl_url: 'https://dl.k8s.io/release/v1.22.0/bin/{{ minikube_os }}/{{ minikube_arch }}/kubectl'
+kubectl_url: 'https://dl.k8s.io/release/{{ kubectl_version }}/bin/{{ minikube_os }}/{{ minikube_arch }}/kubectl'
