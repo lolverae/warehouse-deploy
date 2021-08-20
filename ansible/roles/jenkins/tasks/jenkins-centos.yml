@@ -24,3 +24,10 @@
     name: 
       - epel-release
       - java-11-openjdk-devel
+
+- name: start virtualization service
+  become: true
+  systemd:
+    name: jenkins
+    enabled: yes
+    state: started
