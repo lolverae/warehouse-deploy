@@ -1,7 +1,42 @@
+# ------------------ Ubuntu Packages  -----------------------
+- name: downloading jenkins for ubuntu
+  become: true
+  tags: jenkins, ubuntu
+  get_url:
+    url: '{{ jenkins_key_ubuntu }}'
+    dest: {{ jenkins_target_file }}
+  when: ansible_distribution == "Ubuntu" 
+
+- name: downloading jenkins key for ubuntu
+  become: true
+  tags: jenkins, ubuntu
+  get_url:
+    url: '{{ jenkins_key_ubuntu }}'
+    state: present
+  when: ansible_distribution == "Ubuntu" 
+
+# ------------------ CentOS packages -----------------------
+- name: downloading jenkins for centos
+  become: true
+  tags: jenkins, Centos
+  get_url:
+    url: '{{ jenkins_centos_bin }}'
+    dest: '{{ jenkins_install_dir_centos }}'
+    mode: 0755
+  when: ansible_distribution == "CentOS" 
+
+- name: downloading jenkins key for centos
+  become: true
+  tags: jenkins, CentOS
+  get_url:
+    url: '{{ jenkins_key_centos }}'
+    state: present
+  when: ansible_distribution == "CentOS" 
+
 # ------------------ Software Installation -----------------------
 - name: install jenkins & dependencies on CentOS
   become: true
-  tags: jenkins
+  tags: jenkins, centos
   yum: 
     name: 
       - epel-release
@@ -10,11 +45,11 @@
   when: ansible_distribution == "CentOS"
 
 - name: install jenkins  for Ubuntu
-  tags: jenkins
+  tags: jenkins, ubuntu
   apt: 
     - jenkins
-
   when: ansible_distribution == "Ubuntu"  
+
 # ------------------- Starting Services -----------------------
 - name: reloading daemon
   become: true

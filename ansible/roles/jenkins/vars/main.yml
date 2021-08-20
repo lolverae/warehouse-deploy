@@ -1,2 +1,2 @@
-jenkins_url_centos: '{{ jenkins_mirror }}/{{ jenkins_version }}'
+jenkins_url_centos: '{{ jenkins_war }}/{{ jenkins_version }}'
 jenkins_url_ubuntu: 

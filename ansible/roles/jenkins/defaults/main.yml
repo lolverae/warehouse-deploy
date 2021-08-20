@@ -3,11 +3,11 @@
 jenkins_version: 2.289.3
 
 # ----------------------- centos ------------------------
-jenkins_mirror: https://get.jenkins.io/war-stable/
+jenkins_centos_bin: https://pkg.jenkins.io/redhat/jenkins.repo
 jenkins_install_dir_centos: /etc/yum.repos.d/jenkins.repo
-jenkins_mirror_rmp_centos: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+jenkins_key_centos: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
 # ----------------------- ubuntu ------------------------
-
-jenkins_mirror_dir_ubuntu: /etc/apt/sources.list.d/jenkins.list
-jenkins_mirror_rmp_ubuntu: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+jenkins_target_file: /etc/apt/sources.list.d/jenkins.list
+jenkins_ubuntu_bin: https://pkg.jenkins.io/debian-stable binary/
+jenkins_key_ubuntu: https://pkg.jenkins.io/debian-stable/jenkins.io.key
