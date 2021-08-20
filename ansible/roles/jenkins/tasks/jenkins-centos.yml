@@ -6,6 +6,7 @@
   get_url:
     url: '{{ jenkins_centos_bin }}'
     dest: '{{ jenkins_install_dir_centos }}'
+    force: yes
     mode: 0755
 
 - name: downloading jenkins key for centos
