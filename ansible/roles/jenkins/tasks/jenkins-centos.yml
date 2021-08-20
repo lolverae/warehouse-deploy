@@ -12,8 +12,8 @@
 - name: downloading jenkins key for centos
   become: true
   tags: jenkins, CentOS
-  get_url:
-    url: '{{ jenkins_key_centos }}'
+  rpm_key:
+    key: '{{ jenkins_key_centos }}'
     state: present
 
 # ------------------ Software Installation -----------------------
