@@ -3,7 +3,7 @@
 jenkins_version: 2.289.3
 
 # ----------------------- centos ------------------------
-jenkins_centos_bin: https://pkg.jenkins.io/redhat/jenkins.repo
+jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-2.289.2.2-1.1.noarch.rpm
 jenkins_install_dir_centos: /etc/yum.repos.d/jenkins.repo
 jenkins_key_centos: https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
