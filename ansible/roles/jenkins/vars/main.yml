@@ -1,2 +1,2 @@
-jenkins_url_centos: '{{ jenkins_war }}/{{ jenkins_version }}'
-jenkins_url_ubuntu: 
+---
+jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-{{ jenkins_version }}.noarch.rpm

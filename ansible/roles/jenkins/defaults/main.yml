@@ -2,11 +2,6 @@
 # ----------------------- versions ------------------------
 jenkins_version: 2.289.2.2-1.1
 
-# ----------------------- centos ------------------------
-jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-2.289.2.2-1.1.noarch.rpm
-jenkins_install_dir_centos: /var/lib/jenkins/
-jenkins_key_centos: jenkins-2.289.2.2-1.1.noarch.rpm
-
 # ----------------------- ubuntu ------------------------
 jenkins_target_file: /etc/apt/sources.list.d/jenkins.list
 jenkins_ubuntu_bin: https://pkg.jenkins.io/debian-stable binary/

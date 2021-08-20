@@ -1,20 +1,4 @@
 ---
-# ------------------ CentOS packages -----------------------
-# - name: downloading jenkins for centos
-#   become: true
-#   tags: jenkins, Centos
-#   get_url:
-#     url: '{{ jenkins_centos_bin }}'
-#     dest: '{{ jenkins_install_dir_centos }}'
-#     force: yes
-#     mode: 0755
-
-# - name: downloading jenkins key for centos
-#   become: true
-#     tags: jenkins, CentOS
-#     key: '{{ jenkins_install_dir_centos }}/{{ jenkins_key_centos }}'
-#     state: present
-
 # ------------------ Software Installation -----------------------
 - name: install jenkins dependencies on CentOS
   become: true
@@ -23,13 +7,7 @@
     name: 
       - epel-release
       - java-11-openjdk-devel
-
-- name: install jenkins on CentOS
-  become: true
-  tags: jenkins, centos
-  yum: 
-    name: '{{ jenkins_centos_bin }}'
-    state: present
+      - '{{ jenkins_centos_bin }}'
 
 - name: start virtualization service
   become: true
