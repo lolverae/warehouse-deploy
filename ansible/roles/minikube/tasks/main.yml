@@ -7,10 +7,10 @@
   check_mode: false
   environment: {}
 
-- include_tasks: jenkins-centos.yml
+- include_tasks: minikube-centos.yml
   when: '"CentOS" in os_release.stdout or "Red Hat Enterprise Linux" in os_release.stdout or "Oracle" in os_release.stdout'
 
-- include_tasks: jenkins-debian.yml
+- include_tasks: minikube-debian.yml
   when: '"Debian" in os_release.stdout or "Ubuntu" in os_release.stdout'
 
 # ------------------- Software Download -----------------------
