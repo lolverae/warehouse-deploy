@@ -1,0 +1,15 @@
+---
+# ------------------ Updating package managers ---------------------- 
+- name: install updates for Ubuntu
+  become: true
+  apt: 
+    update_only: yes
+    update_cache: yes
+
+# ------------------ Software Installation -----------------------
+- name: install updates for Ubuntu
+  apt: 
+    - qemu-kvm
+    - libvirt-daemon-system
+    - libvirt-clients
+    - bridge-utils

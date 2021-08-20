@@ -1,0 +1,19 @@
+---
+# ------------------ Updating package managers ---------------------- 
+- name: install updates for CentOS
+  become: true
+  yum: 
+    update_only: yes
+    update_cache: yes
+
+# ------------------ Software Installation -----------------------
+- name: install minikube kvm drivers
+  become: true
+  tags: minikube
+  yum: 
+    name: 
+      - libvirt
+      - qemu-kvm
+      - libvirt-python
+      - libguestfs-tools
+      - bridge-utils
