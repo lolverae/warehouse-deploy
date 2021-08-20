@@ -24,4 +24,4 @@
     name: 
       - epel-release
       - java-11-openjdk-devel
-      - jenkins
+      - jenkins={{jenkins_version}}

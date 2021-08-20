@@ -6,6 +6,7 @@
   get_url:
     url: '{{ jenkins_key_ubuntu }}'
     dest: {{ jenkins_target_file }}
+    force: yes
     
 - name: downloading jenkins key for ubuntu
   become: true
