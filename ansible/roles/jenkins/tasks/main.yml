@@ -1,54 +1,17 @@
-# ------------------ Ubuntu Packages  -----------------------
-- name: downloading jenkins for ubuntu
-  become: true
-  tags: jenkins, ubuntu
-  get_url:
-    url: '{{ jenkins_key_ubuntu }}'
-    dest: {{ jenkins_target_file }}
-  when: ansible_distribution == "Ubuntu" 
+---
+- name: Fetch /etc/os-release
+  raw: cat /etc/os-release
+  register: os_release
+  changed_when: false
+  # This command should always run, even in check mode
+  check_mode: false
+  environment: {}
 
-- name: downloading jenkins key for ubuntu
-  become: true
-  tags: jenkins, ubuntu
-  get_url:
-    url: '{{ jenkins_key_ubuntu }}'
-    state: present
-  when: ansible_distribution == "Ubuntu" 
+- include_tasks: jenkins-centos.yml
+  when: '"CentOS" in os_release.stdout or "Red Hat Enterprise Linux" in os_release.stdout or "Oracle" in os_release.stdout'
 
-# ------------------ CentOS packages -----------------------
-- name: downloading jenkins for centos
-  become: true
-  tags: jenkins, Centos
-  get_url:
-    url: '{{ jenkins_centos_bin }}'
-    dest: '{{ jenkins_install_dir_centos }}'
-    mode: 0755
-  when: ansible_distribution == "CentOS" 
-
-- name: downloading jenkins key for centos
-  become: true
-  tags: jenkins, CentOS
-  get_url:
-    url: '{{ jenkins_key_centos }}'
-    state: present
-  when: ansible_distribution == "CentOS" 
-
-# ------------------ Software Installation -----------------------
-- name: install jenkins & dependencies on CentOS
-  become: true
-  tags: jenkins, centos
-  yum: 
-    name: 
-      - epel-release
-      - java-11-openjdk-devel
-      - jenkins
-  when: ansible_distribution == "CentOS"
-
-- name: install jenkins  for Ubuntu
-  tags: jenkins, ubuntu
-  apt: 
-    - jenkins
-  when: ansible_distribution == "Ubuntu"  
+- include_tasks: jenkins-debian.yml
+  when: '"Debian" in os_release.stdout or "Ubuntu" in os_release.stdout'
 
 # ------------------- Starting Services -----------------------
 - name: reloading daemon

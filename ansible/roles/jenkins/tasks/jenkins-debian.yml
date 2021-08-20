@@ -1,0 +1,20 @@
+# ------------------ Ubuntu Packages  -----------------------
+- name: downloading jenkins for ubuntu
+  become: true
+  tags: jenkins, ubuntu
+  get_url:
+    url: '{{ jenkins_key_ubuntu }}'
+    dest: {{ jenkins_target_file }}
+    
+- name: downloading jenkins key for ubuntu
+  become: true
+  tags: jenkins, ubuntu
+  get_url:
+    url: '{{ jenkins_key_ubuntu }}'
+    state: present
+
+# ------------------ Software Installation -----------------------
+- name: install jenkins  for Ubuntu
+  tags: jenkins, ubuntu
+  apt:
+    - jenkins
