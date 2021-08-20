@@ -13,7 +13,7 @@
   become: true
   tags: jenkins, CentOS
   rpm_key:
-    key: '{{ jenkins_key_centos }}'
+    key: '{{ jenkins_install_dir_centos }}/{{ jenkins_key_centos }}'
     state: present
 
 # ------------------ Software Installation -----------------------
