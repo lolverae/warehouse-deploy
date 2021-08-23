@@ -1,6 +1,4 @@
 [kube-cluster]
-52.158.254.183
+20.94.200.186
 [jenkins-agent]
-40.65.114.223
-[localhost]
-localhost
+20.94.200.196

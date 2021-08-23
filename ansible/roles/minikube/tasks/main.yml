@@ -31,13 +31,30 @@
     mode: 0755
 
 # ------------------- Starting Services & Minikube -----------------------
-   
-- name: adding user to docker group
+- name: starting docker directory
   become: true
-  command: usermod -aG docker ansadmin && newgrp docker
-  #name: ansadmin
-  #groups: docker
-  #append: yes
+  service:
+    name: docker
+    state: started
+
+- name: Ensure group "docker" exists with correct gid
+  become: true
+  group:
+    name: docker
+    state: present
+    gid: 1750
+
+- name: adding user to group
+  become: true
+  command: usermod -aG docker ansadmin
+  
+- name: chmodding docker
+  become: true
+  file:
+    path: /var/run/docker.sock
+    owner: ansadmin
+    mode: '666'
+
       
 - name: Starting minikube
   tags: minikube

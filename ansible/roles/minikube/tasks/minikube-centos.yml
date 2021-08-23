@@ -32,8 +32,3 @@
       - docker-ce-cli
       - containerd.io
 
-- name: starting docker directory
-  become: true
-  service:
-    name: docker
-    state: started

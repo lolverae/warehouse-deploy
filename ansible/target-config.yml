@@ -2,7 +2,7 @@
 - hosts: kube-cluster 
   remote_user: ansadmin
   roles:
-          #    - minikube
+    - minikube
     - jenkins
 - hosts: jenkins-agent
   remote_user: ansadmin
