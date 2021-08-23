@@ -34,10 +34,10 @@
    
 - name: adding user to docker group
   become: true
-  user:
-    name: ansadmin
-    groups: docker
-    append: yes
+  command: usermod -aG docker ansadmin && newgrp docker
+  #name: ansadmin
+  #groups: docker
+  #append: yes
       
 - name: Starting minikube
   tags: minikube

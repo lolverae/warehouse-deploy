@@ -1,2 +1,3 @@
 ---
-jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-{{ jenkins_version }}.noarch.rpm
+#jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-{{ jenkins_version }}.noarch.rpm
+jenkins_centos_bin: https://downloads.cloudbees.com/cje/rolling/rpm/RPMS/noarch/jenkins-2.289.1.2-1.1.noarch.rpm
