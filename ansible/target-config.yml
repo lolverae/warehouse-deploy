@@ -4,3 +4,7 @@
   roles:
     - minikube
     - jenkins
+- hosts: jenkins-agent
+  remote_user: ansadmin
+  roles:
+    - jenkins

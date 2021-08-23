@@ -7,13 +7,33 @@
     update_cache: yes
 
 # ------------------ Software Installation -----------------------
-- name: install minikube kvm drivers
+- name: install yum utils
   become: true
   tags: minikube
   yum: 
-    name: 
-      - libvirt
-      - qemu-kvm
-      - libvirt-python
-      - libguestfs-tools
-      - bridge-utils
+    name:
+      - yum-utils  
+    
+- name: add stable docker repo
+  become: true
+  tags: docker, minikube
+  command: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+    # - libvirt
+    # - qemu-kvm
+    # - libvirt-python
+    # - libguestfs-tools 
+    # - bridge-utils
+- name: install minikube docker drivers
+  become: true
+  tags: minikube
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+- name: starting docker directory
+  become: true
+  service:
+    name: docker
+    state: started

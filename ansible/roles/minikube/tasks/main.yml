@@ -31,12 +31,14 @@
     mode: 0755
 
 # ------------------- Starting Services & Minikube -----------------------
-- name: start virtualization service
-  become: true
-  service:
-    name: libvirtd
-    state: started
    
+- name: adding user to docker group
+  become: true
+  user:
+    name: ansadmin
+    groups: docker
+    append: yes
+      
 - name: Starting minikube
   tags: minikube
-  command: minikube start
+  command: minikube start --driver=docker
