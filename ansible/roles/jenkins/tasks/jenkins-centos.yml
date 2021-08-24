@@ -8,3 +8,19 @@
       - epel-release
       - java-11-openjdk-devel
       - git
+      - python3-devel
+      - @"Development Tools"
+
+- name: add stable docker repo
+  become: true
+  tags: docker
+  command: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
+
+- name: install minikube docker drivers
+  become: true
+  tags: minikube
+  yum:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
