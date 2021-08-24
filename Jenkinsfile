@@ -11,7 +11,7 @@ pipeline{
       stage('K8s apply'){
           steps{
               script{
-                  sh'''!#/bin/bash
+                  sh'''#!/bin/bash
                   kubectl apply -f ./kubernetes/api/,./kubernetes/database/
                   sleep 10
                   kubectl get svc
