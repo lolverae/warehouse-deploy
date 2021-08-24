@@ -12,7 +12,8 @@ pipeline{
           steps{
               script{
                   sh'''#!/bin/bash
-                  kubectl apply -f ./kubernetes/api/,./kubernetes/database/
+                  kubectl create ns warehouse-ns
+                  kubectl apply -f ./api/,./database/
                   sleep 10
                   kubectl get svc
                   '''
@@ -21,7 +22,7 @@ pipeline{
       }
       stage('k8s clean up'){
           steps {
-            sh 'kubectl delete -f ./kubernetes/api/,./kubernetes/database/'
+            sh 'kubectl delete -f ./api/,./database/'
           }
       }
           
