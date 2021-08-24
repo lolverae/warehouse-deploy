@@ -1,22 +1,9 @@
 ---
 # ------------------ Ubuntu Packages  -----------------------
-- name: downloading jenkins for ubuntu
+- name: installing java & git on debian agents
   become: true
-  tags: jenkins, ubuntu
-  get_url:
-    url: '{{ jenkins_key_ubuntu }}'
-    dest: {{ jenkins_target_file }}
-    force: yes
-    
-- name: downloading jenkins key for ubuntu
-  become: true
-  tags: jenkins, ubuntu
-  get_url:
-    url: '{{ jenkins_key_ubuntu }}'
-    state: present
-
-# ------------------ Software Installation -----------------------
-- name: install jenkins  for Ubuntu
-  tags: jenkins, ubuntu
+  tags: debian
   apt:
-    - jenkins
+    name:
+      - openjdk-11-jdk
+      - git

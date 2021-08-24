@@ -1,15 +1,31 @@
 ---
 # ------------------ Updating package managers ---------------------- 
-- name: install updates for Ubuntu
+- name: install updates for debian
   become: true
   apt: 
     update_only: yes
     update_cache: yes
 
 # ------------------ Software Installation -----------------------
-- name: install updates for Ubuntu
+- name: install updates for debian
   apt: 
-    - qemu-kvm
-    - libvirt-daemon-system
-    - libvirt-clients
-    - bridge-utils
+    - lsb-release
+    - gnupg
+    - curl
+    - ca-certificates
+    - apt-transport-https
+
+- name: add docker gpg key
+  become: true
+  tags: docker, minikube
+  command: "curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
+    
+- name: install minikube docker drivers on debian
+  become: true
+  tags: minikube, debian
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io    
+    
