@@ -9,7 +9,7 @@
       - java-11-openjdk-devel
       - git
       - python3-devel
-      - @"Development Tools"
+      - "@Development Tools"
 
 - name: add stable docker repo
   become: true
