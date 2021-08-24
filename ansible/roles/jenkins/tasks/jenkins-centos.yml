@@ -19,7 +19,7 @@
 
 - name: installing docker compose
   get_url:
-    url: {{ docker_compose_url }}
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose"
     mode: '0666'
 
