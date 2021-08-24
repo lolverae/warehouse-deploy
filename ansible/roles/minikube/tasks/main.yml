@@ -55,6 +55,7 @@
     owner: ansadmin
     mode: '666'
 
+
       
 - name: Starting minikube
   tags: minikube

@@ -16,6 +16,18 @@
   tags: docker
   command: "yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo"
 
+- name: download docker compose
+  become: true
+  tags: docker
+  command: "curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose"
+
+- name: chmodding docker-compose
+  become: true
+  file:
+    path: /usr/local/bin/docker-compose
+    owner: ansadmin
+    mode: '666'
+
 - name: install minikube docker drivers
   become: true
   tags: minikube
