@@ -1,5 +1,5 @@
 pipeline{
-  agent{label 'kube-agent'}
+  agent{label 'minikube-agent'}
   stages{
       stage('Create Secret'){
           steps{
