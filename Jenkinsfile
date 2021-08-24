@@ -22,8 +22,13 @@ pipeline{
       }
       stage('k8s clean up'){
           steps {
-            sh 'kubectl delete -f ./api/,./database/'
-          }
+              script{
+                  sh'''#!/bin/bash
+                  kubectl delete -f ./api/,./database/
+                  kubectl delete ns warehouse-ns
+                   kubectl delete secrets db-user-pass
+                  '''
+              }          }
       }
           
   }
