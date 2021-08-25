@@ -20,16 +20,16 @@ pipeline{
               }
           }
       }
-      stage('k8s clean up'){
-          steps {
-              script{
-                  sh'''#!/bin/bash
-                  kubectl delete -f ./api/,./database/
-                  kubectl delete ns warehouse-ns
-                   kubectl delete secrets db-user-pass
-                  '''
-              }          }
-      }
+    //   stage('k8s clean up'){
+    //       steps {
+    //           script{
+    //               sh'''#!/bin/bash
+    //               kubectl delete -f ./api/,./database/
+    //               kubectl delete ns warehouse-ns
+    //                kubectl delete secrets db-user-pass
+    //               '''
+    //           }}
+    //   }
           
   }
 // post {
