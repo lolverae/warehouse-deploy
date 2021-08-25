@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: warehouse-db
+  namespace: warehouse-ns
 spec:
   ports:
   - port: 5984
