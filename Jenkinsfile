@@ -4,7 +4,13 @@ pipeline{
       stage('Create Secret'){
           steps{
             git branch: 'main', url: 'https://github.com/lolverae/warehouse-deploy.git'
-            sh 'kubectl create secret generic db-user-pass --from-literal=username=username --from-literal=password=password -n warehouse-ns'
+                
+                script{
+                    sh'''#!/bin/bash
+                    kubectl create ns warehouse-ns
+                    kubectl create secret generic db-user-pass --from-literal=username=username --from-literal=password=password -n warehouse-ns
+                    '''
+                }
           }
       }
       
@@ -12,7 +18,6 @@ pipeline{
           steps{
               script{
                   sh'''#!/bin/bash
-                  kubectl create ns warehouse-ns
                   kubectl apply -f ./api/,./database/
                   sleep 10
                   kubectl get svc
