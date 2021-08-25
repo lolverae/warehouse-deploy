@@ -1,0 +1,9 @@
+---
+- name: install minikube docker drivers
+  become: true
+  tags: minikube, docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io

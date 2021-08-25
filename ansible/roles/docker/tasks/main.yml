@@ -1,0 +1,50 @@
+---
+- name: Fetch /etc/os-release
+  raw: cat /etc/os-release
+  register: os_release
+  changed_when: false
+  # This command should always run, even in check mode
+  check_mode: false
+  environment: {}
+
+- include_tasks: docker-centos.yml
+  when: '"CentOS" in os_release.stdout or "Red Hat Enterprise Linux" in os_release.stdout or "Oracle" in os_release.stdout'
+
+- include_tasks: docker-debian.yml
+  when: '"Debian" in os_release.stdout or "Ubuntu" in os_release.stdout'
+
+# ------------------ Installing docker-compose  -----------------------
+
+- name: downloading minikube
+  become: true
+  tags: minikube
+  get_url:
+    url: '{{ docker_url }}'
+    dest: '{{ docker_install_target }}'
+    mode: 0755
+
+# ------------------ Starting docker Packages  -----------------------
+
+- name: starting docker directory
+  become: true
+  service:
+    name: docker
+    state: started
+
+- name: Ensure group "docker" exists with correct gid
+  become: true
+  group:
+    name: docker
+    state: present
+    gid: 1750
+
+- name: adding user to group
+  become: true
+  command: usermod -aG docker ansadmin
+  
+- name: chmodding docker
+  become: true
+  file:
+    path: /var/run/docker.sock
+    owner: ansadmin
+    mode: 0755
