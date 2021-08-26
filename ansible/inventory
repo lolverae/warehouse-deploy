@@ -2,3 +2,5 @@
 20.94.200.186
 [jenkins-agent]
 20.94.200.196
+[local]
+localhost

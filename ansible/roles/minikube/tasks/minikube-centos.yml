@@ -14,5 +14,9 @@
     name:
       - yum-utils  
     
-
+- name: Install helm
+  ansible.builtin.unarchive:
+    src: https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+    dest: /usr/local/bin/helm
+    remote_src: yes
 

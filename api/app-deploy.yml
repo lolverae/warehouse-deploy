@@ -17,7 +17,7 @@ spec:
 
     spec:
       containers:
-      - image: lolverae/warehouse_service:latest
+      - image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}" #lolverae/warehouse_service:latest
         name: warehouse-app
         env:
         - name: COUCHDB_USER
