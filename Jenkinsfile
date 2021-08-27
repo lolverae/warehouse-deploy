@@ -4,7 +4,6 @@ pipeline{
       stage('Create Secret'){
           steps{
             git branch: 'main', url: 'https://github.com/lolverae/warehouse-deploy.git'
-                
                 script{
                     sh'''#!/bin/bash
                     kubectl create ns warehouse-ns
@@ -13,15 +12,15 @@ pipeline{
                 }
           }
       }
-      
+      z
       stage('K8s apply'){
           steps{
               script{
-                  sh'''#!/bin/bash
-                  kubectl apply -f ./api/,./database/
-                  sleep 10
-                  kubectl get svc
-                  '''
+                    sh'''#!/bin/bash
+                    helm install ware-helmchart values.yaml
+                    sleep 10
+                    kubectl get svc
+                    '''
               }
           }
       }
